@@ -1,0 +1,22 @@
+<h1><%= @restaurant.name %></h1>
+
+<%=@restaurant.address  %>
+
+<% @restaurant.reviews.each do |rev| %>
+  <ul>
+    <li>
+      <%= "#{rev.rating} stars" %>
+      <%= ": '#{rev.content}'" %>
+    </li>
+  </ul>
+
+<% end %>
+<%= link_to  "Leave a review", new_restaurant_review_path(@restaurant.id) %>
+
+<%= simple_form_for [ @restaurant, @review ] do |f| %>
+  <%= f.input :rating %>
+  <%= f.input :content %>
+  <%= f.submit "Submit review", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to  "back to restaurants", restaurants_path %>
